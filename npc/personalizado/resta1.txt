@@ -1,0 +1,146 @@
+prontera,144,164,3	script	Resta Um	65,{
+
+	show "[Resta Um]";
+	show "Olá "+ strcharinfo(0) +" !";
+	show "Bem Vindo ao evento Resta Um";
+	next;
+	show "Deseja Entrar?";
+	switch(select("Entrar no Evento!","Como Funciona?","Acessar o Ranking!","Nada, Só quero sair!")){
+
+		case 1:
+	if ($aberto == 0) goto fechado;
+	warp "rwc03",0,0;
+	dispbottom "Você Está Dentro do Resta Um! Boa Sorte!";
+	end;
+		
+		case 2:
+		show "[Resta Um]";
+		show "Em Horarios Definidos o Evento Sera Ligado";
+		show "Você tera 5 minutos para entrar na arena antes que ela feche.";
+		show "Apos O PvP sera ligado e o ultimo sobrevivente sera o Ganhador.";
+		close;
+		end;
+		
+		case 3:
+		show "Em Breve";
+		close;
+		end;
+		
+		case 4:
+	close2;
+	end;
+
+}
+
+	fechado:
+	show "Desculpe o Evento Esta Fechado.";
+	show "Volte mais tarde";
+	close;
+	end;
+
+
+}
+
+
+rwc03,0,0,0	script	NoEvento	-1,{
+OnWhisperGlobal:
+
+if (getgmlevel() == 99){
+show "Deseja Ligar o Evento?";
+switch(select("Ligar","Sair")){
+
+case 1:
+	dispbottom "Evento Ligado com Sucesso!";
+	callsub OnEventStart;
+	end;
+
+case 2:
+	close;
+	end;
+}
+}
+
+
+
+Onclock0500: callsub OnEventStart;
+Onclock1100: callsub OnEventStart;
+OnClock1700: callsub OnEventStart;
+OnClock2300: callsub OnEventStart;
+
+
+OnEventStart:
+set $aberto,1;
+pvpoff "rwc03";
+atcommand "@killmonster2";
+announce "[Resta Um]: O Evento Resta Um Esta Aberto Você Tem 5 Minutos para Entrar!",0;
+sleep2 60000;
+announce "[Resta Um]: Você tem 4 minutos para Entar No Evento!",0;
+sleep2 60000;
+announce "[Resta Um]: Você tem 3 minutos para Entar No Evento!",0;
+sleep2 60000;
+announce "[Resta Um]: Você tem 2 minutos para Entar No Evento!",0;
+sleep2 60000;
+announce "[Resta Um]: Você tem 1 minutos para Entar No Evento!",0;
+sleep2 60000;
+announce "[Resta Um]: O Evento Resta Um Começou! Portais Fechados!",0;
+set $aberto,0;
+goto comecou;
+end;
+
+comecou:
+if(getmapusers("rwc03") == 1) goto cancelado;
+MapAnnounce "rwc03", "[Resta Um]: O Evento tera Inicio em 1 Minuto Preparem-Se!",0;
+sleep2 57000;
+MapAnnounce "rwc03", "Ready?",0;
+sleep2 1000;
+MapAnnounce "rwc03", "Steady!",0;
+sleep2 1000;
+MapAnnounce "rwc03", "Go!!!",0;
+pvpon "rwc03";
+atcommand "@skillon";
+end;
+
+cancelado:
+announce "[Resta Um]: O Evento Resta Um Foi Cancelado por Falta de Jogadores.",0;
+sleep2 5000;
+mapwarp "rwc03","prontera",145,168;
+end;
+}
+
+
+-	script	MortoVivo	-1,{
+
+OnPCKillEvent:
+if( strcharinfo(3) != "rwc03" ) end;
+		if( getmapusers("rwc03") > 1 ) end;
+		monster "rwc03",50,50,"Baú de Guerra",1732,1,"Entregador#func::OnQuebrarBau";
+		end;
+
+	OnPCDieEvent:
+if( strcharinfo(3) != "rwc03" ) end;
+		warp "prontera",150,150;
+	}
+
+-	script	Entregador#func	-1,{
+
+	OnQuebrarBau:
+	pvpoff "rwc03";
+	additem 30139,4;
+	announce "O vencedor do evento resta um foi "+strcharinfo( 0 )+"!",bc_all;
+	warp "prontera",150,150;
+	end;
+}
+
+//MapFlags
+rwc03	mapflag	nomemo
+rwc03	mapflag	nopenalty
+rwc03	mapflag	nobranch
+rwc03	mapflag	pvp_noguild
+rwc03	mapflag	noloot
+rwc03	mapflag	noexp
+rwc03	mapflag	noteleport
+rwc03	mapflag	noreturn
+rwc03	mapflag	nowarp
+rwc03	mapflag	nowarpto
+rwc03	mapflag	nosave
+rwc03	mapflag	pvp

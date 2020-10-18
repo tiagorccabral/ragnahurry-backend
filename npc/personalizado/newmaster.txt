@@ -1,0 +1,151 @@
+//|==========================================================================================|
+//| Script Criando por Dark Eyes | Cronus | Por Favor, Não Retire Os Créditos. |
+//|==========================================================================================|
+//| taua182@hotmail.com |
+//|==========================================================================================|
+//| ************************* Mestre das Classes V 1.0 *********************** |
+//|==========================================================================================|
+-	script	Mestre das classes	-1,{
+
+OnPCLoginEvent:
+if (BaseLevel < 99){
+mes "Bem vindo ao Full PvP, antes de começar escolha sua classe final desejada.";
+next;
+L_inicio:
+menu "Transclasses",-,"Outras Classes",L_outras,"Baby",L_baby;
+next;
+mes "Digite a ID da Transclasse desejada.";
+mes "lista:";
+mes "ID - Classe";
+mes "4008 - Lorde";
+mes "4009 - Sumo Sacerdote";
+mes "4010 - Arquimago";
+mes "4011 - Mestre-Ferreiro";
+mes "4012 - Atirador de Elite";
+mes "4013 - Algoz";
+mes "4015 - Paladino";
+mes "4016 - Mestre";
+mes "4017 - Professor";
+mes "4018 - Desordeiro";
+mes "4019 - Criador";
+mes "4020 - Menestrel";
+mes "4021 - Cigana";
+digit @classe;
+next;
+if (@classe == 4020) {if (sex == 0) {mes "Somente homens podem ser menestrel.";	next;	goto L_inicio;}}
+if (@classe == 4021) {if (sex == 1) {mes "Somente mulheres podem ser ciganas.";	next;	goto L_inicio;}}
+if (@classe < 4008) goto L_erro;
+if (@classe > 4021) goto L_erro;
+if (@classe == 4014) goto L_erro;
+mes "Deseja voltar atrás em sua escolha?";
+setjob @classe;
+menu "Não",-,"Sim",L_inicio;
+set BaseLevel,BaseLevel+999;
+set JobLevel,JobLevel+500;
+atcommand "@allskills";
+mes "Bom jogo!";
+close;
+
+L_outras:
+next;
+mes "Digite a ID da classe desejada.";
+mes "lista:";
+mes "ID - Classe";
+mes "0 - Aprendiz";
+mes "1 - Espadachim";
+mes "2 - Mago";
+mes "3 - Arqueiro";
+mes "4 - Noviço";
+mes "5 - Mercador";
+mes "6 - Gatuno";
+mes "7 - Cavaleiro";
+mes "8 - Sacerdote";
+mes "9 - Bruxo";
+mes "10 - Ferreiro";
+mes "11 - Caçador";
+mes "12 - Mercenário";
+mes "14 - Templário";
+mes "15 - Monge";
+mes "16 - Sábio";
+mes "17 - Arruaceiro";
+mes "18 - Alquimista";
+mes "19 - Bardo";
+mes "20 - Odalisca";
+mes "23 - Super Aprendiz";
+mes "24 - Justiceiro";
+mes "25 - Ninja";
+mes "4046 - Taekwon";
+mes "4047 - Mestre Taekwon";
+mes "4049 - Espiritualista";
+digit @classe;
+next;
+if (@classe == 19) {if (sex == 0) {mes "Somente homens podem ser bardo.";	next;	goto L_inicio;}}
+if (@classe == 20) {if (sex == 1) {mes "Somente mulheres podem ser odalisca.";	next;	goto L_inicio;}}
+if (@classe == 4046) goto L_cont;
+if (@classe == 4047) goto L_cont;
+if (@classe == 4049) goto L_cont;
+if (@classe < 0) goto L_erro;
+if (@classe > 25) goto L_erro;
+if (@classe == 13) goto L_erro;
+if (@classe == 21) goto L_erro;
+if (@classe == 22) goto L_erro;
+L_cont:
+mes "Deseja voltar atrás em sua escolha?";
+setjob @classe;
+menu "Não",-,"Sim",L_inicio;
+set BaseLevel,BaseLevel+999;
+set JobLevel,JobLevel+999;
+atcommand "@allskills";
+mes "Bom jogo!";
+close;
+
+L_baby:
+next;
+mes "Digite a ID da classe desejada.";
+mes "lista:";
+mes "ID - Classe";
+mes "4023 - Mini Aprendiz";
+mes "4024 - Mini Espadachim";
+mes "4025 - Mini Mago";
+mes "4026 - Mini Arqueiro";
+mes "4027 - Mini Noviço";
+mes "4028 - Mini Mercador";
+mes "4029 - Mini Gatuno";
+mes "4030 - Mini Cavaleiro";
+mes "4031 - Mini Sacerdote";
+mes "4032 - Mini Bruxo";
+mes "4033 - Mini Ferreiro";
+mes "4034 - Mini Caçador";
+mes "4035 - Mini Mercenário";
+mes "4037 - Mini Templário";
+mes "4038 - Mini Monge";
+mes "4039 - Mini Sábio";
+mes "4040 - Mini Arruaceiro";
+mes "4041 - Mini Alquimísta";
+mes "4042 - Mini Bardo";
+mes "4043 - Mini Odalisca";
+mes "4045 - Mini Super Aprendiz";
+digit @classe;
+next;
+if (@classe == 4042) {if (sex == 0) {mes "Somente homens podem ser mini bardo.";	next;	goto L_inicio;}}
+if (@classe == 4043) {if (sex == 1) {mes "Somente mulheres podem ser mini odalisca.";	next;	goto L_inicio;}}
+if (@classe < 4022) goto L_erro;
+if (@classe > 4045) goto L_erro;
+if (@classe == 4044) goto L_erro;
+if (@classe == 4036) goto L_erro;
+mes "Deseja voltar atrás em sua escolha?";
+setjob @classe;
+menu "Não",-,"Sim",L_inicio;
+set BaseLevel,BaseLevel+999;
+set JobLevel,JobLevel+999;
+atcommand "@allskills";
+mes "Bom jogo!";
+close;
+
+L_erro:
+mes "Não foi encontrado a ID da classe digitada, por favor confira na lista a ID correta da classe.";
+next;
+goto L_inicio; end;
+}
+end;
+}

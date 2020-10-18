@@ -1,0 +1,20 @@
+prontera,159,163,5	script	Reparador	869,{
+
+if (getgmlevel() < 0) goto naovip;
+show "[Reparador]";
+show "Olá,Gostaria de Reparar Suas Armas Quebradas?";
+menu "Sim",Sim,"Nao",-;
+close;
+
+Sim:
+next;
+show "[Reparador]";
+show "Vamos Lá ^^";
+atcommand "@repairall";
+close;
+
+naovip:
+show "Você Não e Vip, Acesse o Site: www.lalala.com.br é Informe-se Como Ser Vip!!";
+close;
+
+}

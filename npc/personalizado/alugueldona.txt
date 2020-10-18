@@ -1,0 +1,108 @@
+// -------------------------------------------------------| //
+//                _                        _              | //
+//          /\   | |                      | |             | //
+//         /  \  | |_   _  __ _ _   _  ___| |             | //
+//        / /\ \ | | | | |/ _` | | | |/ _ \ |             | //
+//       / ____ \| | |_| | (_| | |_| |  __/ |             | //
+//      /_/    \_\_|\__,_|\__, |\__,_|\___|_|             | //
+//                         __/ | System v1.0              | //
+//                        |___/                           | //
+// ------------------------------------------------------ | //
+// Autor: Cody                                            | //
+// ------------------------------------------------------ | //
+// Versão: 1.1                                            | //
+// ------------------------------------------------------ | //
+// Descrição: Aluga o donate X por Y dias por Z Cash      | //
+// ------------------------------------------------------ | //
+prontera,144,172,5	script	Aluguel de Donate	66,{
+
+	// *** Configurações ***
+	set .n$, "^FF0000[Aluguel de Donate]^000000";
+	setarray .@donate[0], 20288, 20275, 20206, 18291, 18395, 20297, 20290, 18413, 20304, 20307, 20215; //ID dos Donates
+	set .@pay, 2000; //Quanto Cash deve pagar pelo aluguel do item (por dia), ex: 5 dias = 50 Cash
+	set .@limit, 30; //Limite de dias para alugar o item (padrão 30, recomendável)
+	// *** Fim das Confs ***
+	mes .n$;
+	mes "Olá "+strcharinfo(0)+".";
+	mes "Como posso lhe ajudar ?";
+	next;
+	switch(select("Alugar um donate:Mais informações:Sair"))
+	{
+		case 1:
+		mes .n$;
+		mes "Esses são os donates disponíveis:";
+		for(set @i, 0; @i < getarraysize(.@donate); set @i, @i + 1){
+			mes .@donate[@i]+" - "+getitemname(.@donate[@i]);
+			}
+			mes "^FF0000Digite o ID do donate.^000000";
+			next;
+			input .@did;
+			for(set @i, 0; @i < getarraysize(.@donate); set @i, @i + 1){
+			if(.@did != .@donate[@i])
+			{
+				mes .n$;
+				mes "Esse ID não consta na lista!";
+				close;
+			}
+			mes .n$;
+			mes "Por quantos dias deseja alugar?";
+			mes "OBS: ^FF0000"+.@pay+"^000000 Cash por dia.";
+			next;
+			input .@day;
+			if(.@day < 1 || .@day > .@limit)
+			{
+				mes .n$;
+				mes "Valor inválido.";
+				close;
+			}
+			set .@valor, .@day * .@pay;
+			set .@dias, .@day * 86400;
+			mes .n$;
+			mes "Item: ^FF0000"+getitemname(.@did)+"^000000";
+			mes "Aluguel por: ^FF0000"+.@day+" dias ^000000";
+			mes "Valor total:  ^FF0000"+.@valor+" cash^000000";
+			next;
+			mes .n$;
+			mes "Deseja efetuar a compra ?";
+			next;
+			if(select("Sim, desejo:Não.") == 2)
+			{
+				mes .n$;
+				mes "Volte quando quiser!";
+				close;
+			}
+			if(#CASHPOINTS < .@valor)
+			{
+				mes .n$;
+				mes "Você não possui cash suficiente.";
+				close;
+			}
+			set #CASHPOINTS, #CASHPOINTS - .@valor;
+			rentitem .@did, .@dias;
+			mes .n$;
+			mes "Pronto! Em "+.@day+" dias";
+			mes "O item será pego!";
+			mes "Faça bom uso.";
+			dispbottom "Você adquiriu "+getitemname(.@did)+" por "+.@day+" dias. Tenha um bom uso!";
+			close;
+		
+		
+		case 2:
+		mes .n$;
+		mes "Você pega quantos donates quiser.";
+		mes "Pague eles com cash.";
+		mes "Cada "+.@pay+" cash, equivale a 1 dia.";
+		next;
+		mes "Eles não podem:";
+		mes "- Ser negociados";
+		mes "- Dropados";
+		mes "- Vendido em NPC";
+		mes "- Posto na storage da guild";
+		close;
+		
+		case 3:
+		mes .n$;
+		mes "Certo, volte quando quiser algo!";
+		close;
+	}
+}

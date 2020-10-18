@@ -1,0 +1,42 @@
+// ======================================================== 
+// Ban por IP 
+// =-=-=-= Versão Atual =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-= 
+// 1.0 
+// =-=-=-= Npc =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-= 
+// SonG PoisoN 
+// =-=-=-= Descrição =-=-=-=-=-=-==-=-=-=-=-=-=-=-=-=-=-=-= 
+// Ban por IP. 
+// ======================================================== 
+payon,266,293    script    IP Ban    700,{ 
+
+    if(getgmlevel()<99) goto L_lvl; 
+    show "[IP Ban]"; 
+    show "O que você deseja fazer?"; 
+    menu "Banir po IP",L_yes,"Remover IP Bandido",L_remove,"Não desejo fazer nada",L_no; 
+    
+L_yes:    
+    input .@ipbannumber$; 
+    show "Qual a razão para bani-lo?"; 
+    next; 
+    input .@ipbanreason$; 
+    query_sql "INSERT INTO ipbanlist (list,btime,rtime,reason) VALUES ('"+.@ipbannumber$+"','"+gettime(7)+"-"+gettime(6)+"-"+gettime(5)+" "+gettime(3)+":"+gettime(2)+":"+gettime(1)+"','2099-01-01 00:00:00','"+.@ipbanreason$+"')"; 
+    show "[IP Ban]";    
+    show "Pronto o IP foi adicionado! E já está banido.";    
+    close; 
+    
+L_remove: 
+    input .@ipbannumber$; 
+    query_sql "DELETE FROM `ipbanlist` WHERE `list` = '"+.@ipbannumber$+"'"; 
+    show "O IP Banido foi Removido.";    
+    close; 
+
+L_no: 
+    show "[IP Ban]";    
+    show "Tchau!"; 
+    close; 
+
+L_lvl: 
+    show "[IP Ban]";    
+    show "Opa! Desculpe, mas você não possui acesso ao npc!"; 
+    close; 
+}

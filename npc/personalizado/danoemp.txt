@@ -1,0 +1,58 @@
+//=====Flex Scripts ===================================================
+//===== NPC que Testa o dano no Emperium
+//===== Por: ==========================================================
+//S a i D 
+//===== Modificação: ==================================================
+// Flex
+//===== Current Version: ==============================================
+//= Versão
+//===== Compatível com: ===============================================
+//= Cronus
+//===== Descrição: ====================================================
+//= Dano no Emperium
+//===== Comentários adicionais: =======================================
+//Corrigido Alguns Bugs
+//=====================================================================
+prontera,147,164,5	script	Testador de Dano	867,{
+	mes "[Segurança]";
+	mes "Olá";
+	mes "Gostaria de ir ver o seu Dano no Emperium ?";
+	next;
+	mes "Vamos Lá?";
+	menu "Sim",shop,"Não",msg;
+	shop:	warp "06guild_r.gat" ,66,177;
+	msg:	mes "Ok! Volte quando precisar!";
+	close;
+}
+06guild_r.gat,67,177,4	script	Sair	867,{
+
+if (getgmlevel() < 0) goto naovip;
+show "[Sair]";
+show "I Ai, Ja testou dano de mais em?, vamos retornar?";
+menu "Sim",Sim,"Nao",-;
+close;
+
+Sim:
+next;
+show "[Sair]";
+show "Ate mais";
+next;
+atcommand "@warp prontera 155 173";
+close;
+
+naovip:
+show "Ei, você não é VIP!";
+close;
+
+}
+06guild_r.gat,77,183,6	script	Buffer & Healer	920,{
+	  percentheal 100,100;;
+skilleffect 34,0; sc_start SC_BLESSING,360000,10;
+skilleffect 29,0; sc_start SC_INCREASEAGI,360000,10;
+close;
+}
+06guild_r.gat,73,162,8,8	monster	Emperium de Teste	1288,1,0,0,0
+06guild_r.gat,90,161,8,8	monster	Emperium de Teste	1288,1,0,0,0
+06guild_r.gat,109,162,8,8	monster	Emperium de Teste	1288,1,0,0,0
+06guild_r.gat,127,163,8,8	monster	Emperium de Teste	1288,1,0,0,0
+// Map Flag //

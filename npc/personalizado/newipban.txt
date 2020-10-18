@@ -1,0 +1,55 @@
+//===== Cronus Script & brAthena Script ========================
+//= Ban por IP
+//===== Por: ================================================
+//= SonG PoisoN & Notradamus
+//===== Versão Atual: ========================================
+//= 1.0a
+//===== Descrição: ===========================================
+//= Bani os jogadores pelo IP.
+//===== Changelog: ==========================================
+//= 1.0 Script inicial.
+//= 1.0a Otimizado e algumas correções. [Notradamus]
+//============================================================
+payon,140,149,6	script	Natalya	700,{ 
+
+set .ipban$,"[^FF0000 Natalya ^000000]";
+
+if (getgmlevel() < 99){
+           mes .ipban$;
+           mes "Me desculpe, mas atendo somente a";
+           mes "GameMaster.";
+           close; 
+}
+
+            mes .ipban$;
+            mes "Selecione a opção desejada."; 
+                     switch(select("- Banir por IP.:- Remover IP Banido.:- Nada, obrigad"+(Sex ? "o" : "a")+".")){
+
+case 1:  next;
+            mes .ipban$;
+            mes "Digite o endereço IP do usuário."; input .@ipbannumber$;
+            next;  
+            mes .ipban$;
+            mes "Qual a razão para bani-lo?"; input .@ipbanreason$; 
+            next;
+            mes .ipban$;
+            query_sql "INSERT INTO ipbanlist (list,btime,rtime,reason) VALUES ('"+.@ipbannumber$+"','"+gettime(7)+"-"+gettime(6)+"-"+gettime(5)+" "+gettime(3)+":"+gettime(2)+":"+gettime(1)+"','2099-01-01 00:00:00','"+.@ipbanreason$+"')"; 
+            mes "Configuração efetuada com sucesso! IP foi banido.";    
+            close; 
+    
+case 2: next;
+            mes .ipban$;
+            mes "Digite o endereço IP do usuário."; input .@ipbannumber$;
+            next;
+            mes .ipban$;
+            query_sql "DELETE FROM `ipbanlist` WHERE `list` = '"+.@ipbannumber$+"'";          
+            mes "Endenreço de IP removido com sucesso!";        
+            close; 
+
+case 3: next;
+            mes .ipban$;
+            mes "Tudo bem, volte quando quiser.";    
+            close; 
+
+}
+}

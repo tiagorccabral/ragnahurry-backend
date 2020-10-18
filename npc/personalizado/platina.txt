@@ -1,0 +1,11 @@
+//===== Cronus Script ========================================
+//= Habilidades Platina
+//===== Por: =================================================
+//= Mehah
+//===== Versão Atual: ========================================
+//= 1.3a
+//===== Descrição: ===========================================
+//= Recebe as habilidade de Quest
+//===== Changelog: ===========================================
+//= 1.1 Adicionado suporte as novas habilidades de Quest [Mehah]
+//= 1.2 Removido Fingir de Morto das Classes

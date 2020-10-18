@@ -1,0 +1,12 @@
+prontera.gat,160,187,4	script	Buff's	750,{
+	  percentheal 100,100;
+skilleffect 33,0; sc_start SC_ANGELUS,360000,10;
+skilleffect 74,0; sc_start SC_MAGNIFICAT,360000,5;
+skilleffect 75,0; sc_start SC_GLORIA,360000,5;
+skilleffect 66,0; sc_start SC_IMPOSITIO,360000,5;
+skilleffect 67,0; sc_start SC_SUFFRAGIUM,360000,3;
+skilleffect 34,0; sc_start SC_BLESSING,360000,10;
+skilleffect 29,0; sc_start SC_INCREASEAGI,360000,10;
+skilleffect 357,0; sc_start SC_CONCENTRATION,360000,5;
+close;
+}

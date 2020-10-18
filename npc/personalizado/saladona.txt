@@ -1,0 +1,40 @@
+prontera,164,164,2	script	Sala Donate	469,{
+
+//Configuracoes:
+set .server$,"Ragna Stick";
+
+//Script:
+show "[ ^0000FFSala Donate^000000 ]";
+show "Você deseja ir até a sala donate?";
+menu "Sim",-,"Não",cla;
+warp "pvp_n_room",52,20;
+close;
+
+cla:
+show "Ok, volte quando quiser !";
+close;
+
+}
+
+pvp_n_room,55,16,4	script	Retornar	508,{
+
+show "[ ^0000FFRetornar^000000 ]";
+show "Deseja retornar para Prontera?";
+menu "Sim",-,"Não",cla;
+next;
+show "Ok,até mais";
+next;
+warp "prontera.gat",155,177;
+close;
+
+cla:
+show "Tudo bem, fale comigo quando quiser voltar";
+close;
+
+
+}
+
+pvp_n_room,46,41,480	cashshop	Donates Topo	512,18355:8000,18409:7000,18398:8500,20236:8000,20288:5000,20275:6000,20206:6500
+pvp_n_room,51,41,481	cashshop	Donates Meio	512,18346:8000,18291:5000,18395:5000,18314:7000,20297:4500,20290:5500,20251:6000,20252:9500
+pvp_n_room,56,41,468	cashshop	Donates Baixo	512,18401:8000,18182:7000,18413:6000,18320:8500,18322:9500,20295:8500,20304:4500,20307:5000,20215:5000
+pvp_n_room,51,44,468	cashshop	Equips Donates	512,18405:4500,18404:4500,18406:4500,18407:4500

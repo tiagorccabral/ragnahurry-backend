@@ -1,0 +1,20 @@
+prontera,151,192,5	script	Saver	832,{
+
+if (getgmlevel() < 0) goto naovip;
+show "[Saver]";
+show "Olá, gostaria de fazer de prontera sua cidade de respawn?";
+menu "Sim",Sim,"Nao",-;
+close;
+
+Sim:
+next;
+show "[Saver]";
+show "Tudo bem, tenha um bom dia^^";
+atcommand "@save";
+close;
+
+naovip:
+show "Você Não e Vip, Acesse o Site: www.lalala.com.br é Informe-se Como Ser Vip!!";
+close;
+
+}

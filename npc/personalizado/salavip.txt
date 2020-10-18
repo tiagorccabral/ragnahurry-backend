@@ -1,0 +1,181 @@
+// Script criado por : Linkz !!!
+prontera,170,184,4 script Sala vip 951,{
+
+set .n$, "[^FF0000 Sala vip ^000000]";  // Nome do NPC
+set .sitero$, "^FF0000 www.ragnahurry.weebly.com ^000000";  // Site do seu servidor
+set @lvmin,1; // Lv minimo para entrar na Sala Vip
+
+cutin "kafra_07",2;
+mes .n$;
+mes " Ola "+strcharinfo(0)+"! O que deseja ?";
+next;
+if(select("- Entrar Na Sala Vip:- Nada")==2){ close; }
+if(getgmlevel() < @lvmin){
+mes .n$;
+mes " Voce nao e um usuario vip ! ";
+mes " Acesse o nosso site e saiba como ser um usuario vip ! ";
+mes ""+.sitero$+"";
+close;
+}
+else
+{
+mes .n$;
+mes " Tudo bem , te levarei ate a Sala vip ! ";
+close2;
+warp "que_qaru05",248,332;
+end;
+}
+}
+
+que_qaru05,246,344,6 script Trocador de Sexo 749,{
+
+set .n$, "[ Trocador de Sexo ]";
+
+mes .n$;
+mes " Ola "+strcharinfo(0)+"!"; 
+mes " O que deseja ? ";
+next;
+if(select("- Trocar de Sexo:- Nada")==2) { close; }
+mes .n$;
+mes " Tudo bem , irei trocar !";
+changesex;
+close;
+}
+
+que_qaru05,252,344,6 script Reparador 792,{
+
+set .n$, "[ Reparador ]";
+
+mes .n$;
+mes " Ola "+strcharinfo(0)+" , vai querer reparar seus itens ? ";
+next;
+if(select("- Sim:- Nao")==2) { close; }
+mes .n$;
+mes " Tudo bem , prontinho . ";
+close2;
+atcommand "@repairall";
+end;
+}
+
+que_qaru05,249,344,6	script	Refiner +15	813,{
+
+// Peças refináveis: Deixe "" para ignorar aquela peça.
+	setarray .@_ref_able$,"Cabeça - Topo","Vestimenta","Mão esquerda","Mão direita","Capa","Calçados","Acessório 1","Acessório 2","Cabeça - Meio","Cabeça - Baixo";
+// Preço do Refinador
+	set .@_ref_cost,5000;
+// O Refinador pode refinar itens não-refináveis? 1=Sim / 0=Não
+	set .@_ref_ignore,1;
+// Até quanto o Refinador pode refinar os itens?
+	set .@_ref_max,15;
+// O refinador pode diminuir a taxa de refinamento dos itens? 1=Sim / 0=Não
+	set .@_ref_dec,1;
+// Não altere nada abaixo a não ser que saiba o que está fazendo.
+	mes "[ ^FF0000"+strnpcinfo(1)+"^000000 ]";
+	mes "Olá, "+strcharinfo(0)+". Como vai você? Veio em busca de meus serviços especiais?";
+	next;
+	if(select("- Sim, eu vim.:- Por que seus serviços são especiais?")==2){
+		mes "[ ^FF0000"+strnpcinfo(1)+"^000000 ]";
+		mes "Vários fatores...";
+		mes "- Eu NUNCA falho.";
+		mes "- Eu posso refinar:";
+		for (set .@i, 0; .@i < 10; set .@i, .@i + 1)
+			mes "   * "+.@_ref_able$[.@i];
+		if(.@_ref_ignore)
+			mes "- Eu posso refinar itens que os ferreiros normais não conseguem.";
+		if(.@_ref_max > 10)
+			mes "- Eu posso refinar itens até +"+.@_ref_max+".";
+		if(.@_ref_dec)
+			mes "- Eu posso diminuir a taxa de refinamento de itens.";
+		next;
+	}
+	mes "[ ^FF0000"+strnpcinfo(1)+"^000000 ]";
+	mes "O que deseja de mim?";
+	next;
+	setarray .@_ref_temp$[0],"","- Desaprimorar equipamento";
+	set @mode, select("- Aprimorar equipamento:"+.@_ref_temp$[.@_ref_dec]+":- Cancelar");
+	mes "[ ^FF0000"+strnpcinfo(1)+"^000000 ]";
+	if(@mode == 3 || (@mode == 2 && !.@_ref_dec)){ //Anti Hacker
+		mes "Siga seu caminho.";
+		close;
+	}
+	mes "Selecione a parte onde deseja que eu realize o trabalho?";
+	next;
+	set .@menu$,"";
+	for (set .@i, 0; .@i < 10; set .@i, .@i + 1)
+		set .@menu$, .@menu$ + .@_ref_able$[.@i] + " [" + getequipname((.@i+1)) + "]:";
+	set .@menu$, .@menu$ + "Cancelar";
+	set @part, select(.@menu$);
+	mes "[ ^FF0000"+strnpcinfo(1)+"^000000 ]";
+	if(@part > 10 || .@_ref_able$[(@part - 1)] == ""){ //Anti Hacker
+		mes "Siga seu caminho.";
+		close;
+	}
+	if(!getequipisequiped(@part)){
+		mes "Você quer que eu queime seu corpo no fogo ardente?";
+		close;
+	}
+	if(!getequipisenableref(@part) && !.@_ref_ignore){
+		mes "Desculpe, não posso trabalhar nesse item.";
+		close;
+	}
+	setarray .@_ref_temp$[1],"aprimorar","desaprimorar";
+	mes "Hmm, e quantas vezes você deseja "+ .@_ref_temp$[@mode] +" esse equipamento?";
+	next;
+	input @count;
+	mes "[ ^FF0000"+strnpcinfo(1)+"^000000 ]";
+	if(!@count){
+		mes "Se você não quer nada...";
+		close;
+	}
+	if((((@count + getequiprefinerycnt(@part)) > .@_ref_max) && @mode == 1) || (((getequiprefinerycnt(@part) - @count) < 0) && @mode == 2)){
+		mes "Nossa, eu sou bom, mas não posso fazer isso...";
+		close;
+	}
+	if(.@_ref_cost){
+		mes "Para "+.@_ref_temp$[@mode]+" esse item, precisarei de "+ (@count * .@_ref_cost) + "z, você deseja continuar?";
+		next;
+		if(select("- Sim:- Não, isso é um roubo!")==2){
+			mes "[ ^FF0000"+strnpcinfo(1)+"^000000 ]";
+			mes "Então volte para o refinador comum.";
+			close;
+		}
+		mes "[ ^FF0000"+strnpcinfo(1)+"^000000 ]";
+	}
+	if(Zeny < (@count * .@_ref_cost)){
+		mes "Você precisa de mais dinheiro se deseja ficar forte.";
+		close;
+	}
+	set Zeny, Zeny - (@count * .@_ref_cost);
+	switch(@mode){
+		case 1:
+			for (set .@i, 0; .@i < @count; set .@i, .@i + 1)
+				successrefitem @part;
+			break;
+		case 2:
+			setarray @cards,getequipcardid(@part,0),getequipcardid(@part,1),getequipcardid(@part,2),getequipcardid(@part,3);
+			set @refine, getequiprefinerycnt(@part);
+			set @id, getequipid(@part);
+			unequip @part;
+			delitem2 @id,1,1,@refine,0,@cards[0],@cards[1],@cards[2],@cards[3];
+			getitem2 @id,1,1,(@refine - @count),0,@cards[0],@cards[1],@cards[2],@cards[3];
+			equip @id;
+			specialeffect2 154;
+	}
+	mes "Clang !! Clang !! Clang !!";
+	next;
+	mes "[ ^FF0000"+strnpcinfo(1)+"^000000 ]";
+	mes "Aqui está! Boa sorte!";
+	close;
+}
+
+
+que_qaru05 mapflag nowarp
+que_qaru05 mapflag nowarpto
+que_qaru05 mapflag noteleport
+
+que_qaru05,235,338,6 shop Alquimista 46,7134:-1,970:-1,950:-1,1044:-1,713:-1,1059:-1,929:-1,7143:-1,7141:-1,7140:-1,7127:-1,7128:-1,7129:-1,7130:-1,7131:-1,7132:-1,7133:-1,7144:-1
+que_qaru05,237,334,6 shop Refinamento e Forja 63,1010:-1,1011:-1,985:-1,984:-1,999:-1,1000:-1
+que_qaru05,239,332,6 shop Vendedor de Inseticida 55,937:-1,952:-1,939:-1,7033:-1,972:-1,657:-1,713:-1
+que_qaru05,241,330,6 shop Utilidades#vip 53,501:-1,502:-1,503:-1,504:-1,506:-1,645:-1,656:-1,601:-1,602:-1,1065:-1,611:-1,1771:-1,7433:-1,7126:-1,1057:-1,1012:-1,1013:-1,947:-1,946:-1,904:-1,905:-1,1025:-1
+que_qaru05,239,328,6 shop Gemas e Pedra 50,715:-1,716:-1,717:-1,7521:-1,7522:-1,7523:-1,12040:-1
+que_qaru05,243,328,6 shop Flechas 732,12004:-1,12104:-1,12006:-1,12012:-1,12005:-1,12008:-1,12007:-1,12011:-1,12009:-1,12013:-1,12010:-1,12015:-1,12014:-1,12183:-1

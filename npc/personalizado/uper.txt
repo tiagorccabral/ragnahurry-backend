@@ -1,0 +1,9 @@
+//Criada - Por Sticker
+prontera,148,188,3	script	Upadora	103,{
+
+set BaseLevel,BaseLevel+999;
+set JobLevel,JobLevel+999;
+atcommand "@allskills";
+mes "Bom jogo!";
+close;
+}

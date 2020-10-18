@@ -1,0 +1,78 @@
+prontera.gat,151,188,5	script	Mestra das Classes	123,{
+
+	if(Class != 0) npctalk "Você já escolheu sua profissão!";
+	if(Class == 0 && SkillPoint == 0 && JobLevel == 10)
+	switch(select("Classes Normais:Classes Bebês"))
+	{
+		case 1:
+			switch(select("2-1T:2-2T:Expandidas"))
+			{
+				case 1:
+					switch(select("Lorde:Sumo-Sacerdote:Arquimago:Mestre-Ferreiro:Sniper:Algoz"))
+					{
+						case 1: jobchange 4008; end;
+						case 2: jobchange 4009; end;
+						case 3: jobchange 4010; end;
+						case 4: jobchange 4011; end;
+						case 5: jobchange 4012; end;
+						case 6: jobchange 4013; end;
+					}
+
+
+				case 2:
+					switch(select("Paladino:Mestre:Professor:Desordeiro:Criador:Menestrel/Cigana"))
+					{
+						case 1: jobchange 4015; end;
+						case 2: jobchange 4016; end;
+						case 3: jobchange 4017; end;
+						case 4: jobchange 4018; end;
+						case 5: jobchange 4019; end;
+						case 6: if(!Sex){jobchange 4021;}else{jobchange 4020;} end;
+					}
+
+				case 3:
+					switch(select("Mestre Taekwon:Espiritualista:Justiceiro:Ninja:Super Aprendiz"))
+					{
+
+						case 1: jobchange 4047; end;
+						case 2: jobchange 4049; end;
+						case 3: jobchange 24; end;
+						case 4: jobchange 25; end;
+						case 5: jobchange 23; end;
+					}
+			}
+	
+		case 2:
+			switch(select("2-1:2-2:Expandidas"))
+			{
+			
+				case 1:
+					switch(select("Cavaleiro:Sacerdote:Bruxo:Ferreiro:Caçador:Mercenário"))
+					{
+						case 1: jobchange 4030; end;
+						case 2: jobchange 4031; end;
+						case 3: jobchange 4032; end;
+						case 4: jobchange 4033; end;
+						case 5: jobchange 4034; end;
+						case 6: jobchange 4035; end;
+					}
+
+
+				case 2:
+					switch(select("Templário:Monge:Sábio:Arruaceiro:Alquimista:Bardo/Odalisca"))
+					{
+						case 1: jobchange 4037; end;
+						case 2: jobchange 4038; end;
+						case 3: jobchange 4039; end;
+						case 4: jobchange 4040; end;
+						case 5: jobchange 4041; end;
+						case 6: if(!Sex){jobchange 4043;}else{jobchange 4042;} end;
+					}
+
+				case 3:
+					select("Super Bebê");
+					jobchange 4045; end;
+			}
+	}
+	end;
+}

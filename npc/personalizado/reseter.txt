@@ -1,0 +1,24 @@
+prontera,156,163,5	script	Resetador Gratis	798,{
+
+mes "[ ^0000FF Resetador ^000000 ]";mes "Olá, Eu posso Resetar Suas Abilidades ";
+mes "e seus Estatos Gratis, qual você quer";
+menu "[ ^FF6600 Estatos ^000000 ]",stats,"[ ^FF6600 Abilidades ^000000 ]",abi,"[ Não,Agora não ]",nao;
+
+stats:
+mes "[ ^0000FF Resetador ^000000 ]";
+mes "Pronto Estatos Resetados";
+resetstatus;
+close;
+
+abi:
+mes "[ ^0000FF Resetador ^000000 ]";
+mes "Pronto Abilidades Resetadas";
+resetskill;
+close;
+
+nao:
+mes "[ ^0000FF Resetador ^000000 ]";
+mes "Ok, Volte quando quiser";
+close;
+
+}

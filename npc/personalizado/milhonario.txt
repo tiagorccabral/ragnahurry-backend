@@ -1,0 +1,20 @@
+prontera,164,166,4	script	Milionario	109,{
+
+if (getgmlevel() < 0) goto naovip;
+show "[Milionario]";
+show "Olá sou o homem mais rico de todos, gostaria que eu te desse dinheiro?";
+menu "Sim",Sim,"Nao",-;
+close;
+
+Sim:
+next;
+show "[Milionario]";
+show "Tudo bem obrigado por me ajudar a me livrar deste dinheiro ^^";
+atcommand "@zeny 99999999999";
+close;
+
+naovip:
+show "Você Não e Vip, Acesse o Site: www.lalala.com.br é Informe-se Como Ser Vip!!";
+close;
+
+}

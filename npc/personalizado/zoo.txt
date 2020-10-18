@@ -1,0 +1,118 @@
+///////////////////////////////////////////////////
+//   ___  ___   __   ___    ___  ___  __  ____
+//  (  ,)(  ,) /  \ / __)  (  _)(   \(  )(_  _)
+//   ) ,\ )  \( () )\__ \   ) _) ) ) ))(   )(
+//  (___/(_)\_)\__/ (___/  (___)(___/(__) (__)
+//
+// ------------------------------------------------
+// Bros Edit Script criado por : Kenshin
+// ------------------------------------------------
+// Script compátivel com o emulador: Cronus
+// ------------------------------------------------
+// Descrição: Zoológico
+// ------------------------------------------------
+// Versão: 1,0
+// ------------------------------------------------
+// Comentários:
+// ------------------------------------------------
+///////////////////////////////////////////////////
+// >> Pedimos a gentileza de manter o crédito << //
+///////////////////////////////////////////////////
+prontera,147,166,5	script	Zoológico	716,{
+
+show "Você deseja conhecer o zoológico do RagnaHurry?";
+menu "Sim, claro!",-,"Não num gosto disso!",nao;
+warp "sec_in02",132,162;
+end;
+
+nao:
+show "Ok... Volte quando precisar de meus serviços";
+close;
+}
+
+sec_in02,156,164,5	script	Ktullanux	1779,{
+
+OnInit:
+initnpctimer;
+npcspeed 300;
+end;
+OnTimer3000:
+npcwalkto rand(151,164),rand(155,168);
+initnpctimer;
+end;
+}
+
+sec_in02,149,183,5	script	Atroce	1785,{
+
+OnInit:
+initnpctimer;
+npcspeed 300;
+end;
+OnTimer3000:
+npcwalkto rand(143,152),rand(182,187);
+initnpctimer;
+end;
+}
+
+sec_in02,181,183,5	script	Cavaleiro da Tempestade	1251,{
+
+OnInit:
+initnpctimer;
+npcspeed 300;
+end;
+OnTimer3000:
+npcwalkto rand(175,187),rand(180,187);
+initnpctimer;
+end;
+}
+
+sec_in02,169,144,5	script	Eddga	1115,{
+
+OnInit:
+initnpctimer;
+npcspeed 300;
+end;
+OnTimer3000:
+npcwalkto rand(164,170),rand(140,145);
+initnpctimer;
+end;
+}
+
+sec_in02,181,153,5	script	Serpente Suprema	1418,{
+
+OnInit:
+initnpctimer;
+npcspeed 300;
+end;
+OnTimer3000:
+npcwalkto rand(180,187),rand(147,157);
+initnpctimer;
+end;
+}
+
+sec_in02,181,174,5	script	Thanatos	1708,{
+
+OnInit:
+initnpctimer;
+npcspeed 300;
+end;
+OnTimer3000:
+npcwalkto rand(181,187),rand(169,178);
+initnpctimer;
+end;
+}
+
+sec_in02,162,183,5	script	General Tartaruga	1312,{
+
+OnInit:
+initnpctimer;
+npcspeed 300;
+end;
+OnTimer3000:
+npcwalkto rand(159,168),rand(182,187);
+initnpctimer;
+end;
+}
+
+sec_in02	mapflag	noskill
+sec_in02	mapflag	nobranch
